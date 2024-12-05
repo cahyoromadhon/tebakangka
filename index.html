@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Game Tebak Angka dengan Sistem Poin</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Game Tebak Angka</h1>
+    <div id="startScreen">
+      <p>Masukkan nama Anda untuk memulai permainan:</p>
+      <input type="text" id="playerName" placeholder="Nama Anda">
+      <button id="startButton">Mulai</button>
+    </div>
+    <div id="gameScreen" class="hidden">
+      <p id="welcomeMessage"></p>
+      <p>Tebak angka antara <strong>1</strong> dan <strong>100</strong>.</p>
+      <input type="number" id="guess" placeholder="Masukkan tebakan" min="1" max="100">
+      <button id="checkButton">Cek</button>
+      <p id="message"></p>
+      <p><strong>Poin:</strong> <span id="points">100</span></p>
+      <button id="restartButton" class="hidden">Mulai Lagi</button>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+
+</html>
