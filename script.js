@@ -1,6 +1,6 @@
 // script.js
 let randomNumber = Math.floor(Math.random() * 100) + 1; // Angka acak antara 1-100
-let points = 100;
+let points = 10;
 let attempts = 0;
 
 const playerNameInput = document.getElementById('playerName');
@@ -74,7 +74,7 @@ restartButton.addEventListener('click', resetGame);
 // Fungsi untuk mereset permainan
 function resetGame() {
   randomNumber = Math.floor(Math.random() * 100) + 1;
-  points = 100;
+  points = 10;
   attempts = 0;
   pointsDisplay.textContent = points;
   message.textContent = '';
