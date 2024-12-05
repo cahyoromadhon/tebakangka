@@ -1,6 +1,7 @@
 let randomNumber = Math.floor(Math.random() * 100) + 1; // Angka acak antara 1-100
 let points = 0;
 let attempts = 0;
+let selectedLevel = ''; // Variabel untuk menyimpan level yang dipilih
 
 const playerNameInput = document.getElementById('playerName');
 const startButton = document.getElementById('startButton');
@@ -31,17 +32,17 @@ startButton.addEventListener('click', () => {
 // Fungsi untuk memilih level
 levelButtons.forEach((button) => {
   button.addEventListener('click', () => {
-    const level = button.getAttribute('data-level');
-    if (level === 'sulit') {
+    selectedLevel = button.getAttribute('data-level'); // Simpan level yang dipilih
+    if (selectedLevel === 'sulit') {
       points = 5; // Poin untuk level Sulit
-    } else if (level === 'sedang') {
+    } else if (selectedLevel === 'sedang') {
       points = 10; // Poin untuk level Sedang
     }
 
     // Tampilkan layar permainan
     levelScreen.classList.add('hidden');
     gameScreen.classList.remove('hidden');
-    welcomeMessage.textContent = `Halo ${playerNameInput.value}! Anda memilih level ${level}. Selamat bermain!`;
+    welcomeMessage.textContent = `Halo ${playerNameInput.value}! Anda memilih level ${selectedLevel}. Selamat bermain!`;
     resetGame();
   });
 });
@@ -69,7 +70,7 @@ checkButton.addEventListener('click', () => {
     triggerShakeEffect(); // Tambahkan efek getar
     message.style.color = 'red';
   } else {
-    message.textContent = `Selamat! Anda berhasil menebak angka ${randomNumber} dengan benar dalam ${attempts}x percobaan`;
+    message.textContent = `Selamat! Anda berhasil menebak angka ${randomNumber} dengan benar dalam ${attempts}x percobaan.`;
     message.style.color = 'green';
     checkButton.disabled = true;
     restartButton.classList.remove('hidden');
@@ -95,6 +96,14 @@ restartButton.addEventListener('click', resetGame);
 function resetGame() {
   randomNumber = Math.floor(Math.random() * 100) + 1;
   attempts = 0;
+
+  // Reset poin berdasarkan level yang dipilih
+  if (selectedLevel === 'sulit') {
+    points = 5;
+  } else if (selectedLevel === 'sedang') {
+    points = 10;
+  }
+
   pointsDisplay.textContent = points;
   message.textContent = '';
   guessInput.value = '';
