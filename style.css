@@ -25,6 +25,55 @@ p {
   margin: 10px 0;
 }
 
+#levelScreen {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.levelButton {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+}
+
+.levelButton:hover {
+  background-color: #0056b3;
+}
+
+/* Animasi bergetar */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  25% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+
+  75% {
+    transform: translateX(-5px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Tambahkan kelas untuk elemen yang bergetar */
+.shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+
 input[type="number"],
 input[type="text"] {
   width: 80%;

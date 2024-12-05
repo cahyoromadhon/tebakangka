@@ -1,11 +1,11 @@
-// script.js
 let randomNumber = Math.floor(Math.random() * 100) + 1; // Angka acak antara 1-100
-let points = 10;
+let points = 0;
 let attempts = 0;
 
 const playerNameInput = document.getElementById('playerName');
 const startButton = document.getElementById('startButton');
 const startScreen = document.getElementById('startScreen');
+const levelScreen = document.getElementById('levelScreen'); // Layar level
 const gameScreen = document.getElementById('gameScreen');
 const welcomeMessage = document.getElementById('welcomeMessage');
 const guessInput = document.getElementById('guess');
@@ -13,6 +13,7 @@ const checkButton = document.getElementById('checkButton');
 const message = document.getElementById('message');
 const pointsDisplay = document.getElementById('points');
 const restartButton = document.getElementById('restartButton');
+const levelButtons = document.querySelectorAll('.levelButton'); // Tombol level
 
 // Fungsi untuk memulai permainan
 startButton.addEventListener('click', () => {
@@ -22,11 +23,27 @@ startButton.addEventListener('click', () => {
     return;
   }
 
-  // Tampilkan layar permainan
+  // Tampilkan layar pemilihan level
   startScreen.classList.add('hidden');
-  gameScreen.classList.remove('hidden');
-  welcomeMessage.textContent = `Halo, ${playerName}! Selamat bermain!`;
-  resetGame();
+  levelScreen.classList.remove('hidden');
+});
+
+// Fungsi untuk memilih level
+levelButtons.forEach((button) => {
+  button.addEventListener('click', () => {
+    const level = button.getAttribute('data-level');
+    if (level === 'sulit') {
+      points = 5; // Poin untuk level Sulit
+    } else if (level === 'sedang') {
+      points = 10; // Poin untuk level Sedang
+    }
+
+    // Tampilkan layar permainan
+    levelScreen.classList.add('hidden');
+    gameScreen.classList.remove('hidden');
+    welcomeMessage.textContent = `Halo ${playerNameInput.value}! Anda memilih level ${level}. Selamat bermain!`;
+    resetGame();
+  });
 });
 
 // Fungsi untuk mengecek tebakan
@@ -35,6 +52,7 @@ checkButton.addEventListener('click', () => {
 
   if (userGuess < 1 || userGuess > 100 || isNaN(userGuess)) {
     message.textContent = 'Masukkan angka antara 1 dan 100!';
+    triggerShakeEffect(); // Tambahkan efek getar
     message.style.color = 'red';
     return;
   }
@@ -44,12 +62,14 @@ checkButton.addEventListener('click', () => {
 
   if (userGuess < randomNumber) {
     message.textContent = 'Terlalu rendah! Coba lagi.';
+    triggerShakeEffect(); // Tambahkan efek getar
     message.style.color = 'red';
   } else if (userGuess > randomNumber) {
     message.textContent = 'Terlalu tinggi! Coba lagi.';
+    triggerShakeEffect(); // Tambahkan efek getar
     message.style.color = 'red';
   } else {
-    message.textContent = `Selamat! Anda menebak dengan benar dalam ${attempts} percobaan. Poin akhir Anda: ${points}.`;
+    message.textContent = `Selamat! Anda berhasil menebak angka ${randomNumber} dengan benar dalam ${attempts}x percobaan`;
     message.style.color = 'green';
     checkButton.disabled = true;
     restartButton.classList.remove('hidden');
@@ -74,11 +94,18 @@ restartButton.addEventListener('click', resetGame);
 // Fungsi untuk mereset permainan
 function resetGame() {
   randomNumber = Math.floor(Math.random() * 100) + 1;
-  points = 10;
   attempts = 0;
   pointsDisplay.textContent = points;
   message.textContent = '';
   guessInput.value = '';
   checkButton.disabled = false;
   restartButton.classList.add('hidden');
+}
+
+// Fungsi untuk menambahkan efek getar
+function triggerShakeEffect() {
+  message.classList.add('shake');
+  setTimeout(() => {
+    message.classList.remove('shake');
+  }, 300);
 }
