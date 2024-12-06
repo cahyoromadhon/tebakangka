@@ -11,16 +11,22 @@
 <body>
   <div class="container">
     <h1>Game Tebak Angka</h1>
+
+    <!-- Masukkan Nama -->
     <div id="startScreen">
       <p>Masukkan nama Anda untuk memulai permainan:</p>
       <input type="text" id="playerName" placeholder="Nama Anda">
       <button id="startButton">Mulai</button>
     </div>
+
+    <!-- Pilih Level -->
     <div id="levelScreen" class="hidden">
       <h2>Silahkan Pilih Level Permainan</h2>
       <button class="levelButton" data-level="sulit">Sulit</button>
       <button class="levelButton" data-level="sedang">Sedang</button>
     </div>
+
+    <!-- Tampilan Utama Game -->
     <div id="gameScreen" class="hidden">
       <p id="welcomeMessage"></p>
       <p>Tebak angka antara <strong>1</strong> dan <strong>100</strong>.</p>
@@ -30,6 +36,7 @@
       <p><strong>Poin:</strong> <span id="points">100</span></p>
       <button id="restartButton" class="hidden">Mulai Lagi</button>
     </div>
+
   </div>
   <script src="script.js"></script>
 </body>
